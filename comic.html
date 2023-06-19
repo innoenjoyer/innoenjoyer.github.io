@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Comic</title>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="header-content-logo">Portfolio</h1>
+        </div>
+    </header>
+
+    <main>
+        <section class="main-section">
+            <h1 id="comic-title"></h1>
+            <p id="comic-publication-date"></p>
+            <img id="comic-img" src="" alt="">
+        </section>
+    </main>
+
+    <footer>
+        <section class="footer-section">
+            <article>
+                <h4>Site map</h4>
+                <ul>
+                    <li><a href="/">Main page</a></li>
+                    <li><a href="/comic.html">Comic</a></li>
+                </ul>
+            </article>
+            <article>
+                <h4>Funny links</h4>
+                <ul>
+                    <li><a href="http://inno.tatar">inno.tatar</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Not a rickroll</a></li>
+                    <li><a href=""></a></li>
+                </ul>
+            </article>
+            <article></article>
+        </section>
+    </footer>
+
+    <div class="tm-footer">
+        <div class="tm-footer-contacts">
+            <a href="https://github/com/anijackich">
+                <img src="img/social/github.svg" alt="telegram">
+            </a>
+            <a href="https://t.me/anijack">
+                <img src="img/social/telegram.svg" alt="telegram">
+            </a>
+            <a href="mailto:mr@anjk.ru">
+                <img src="img/social/mail.svg" alt="telegram">
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const email = "e.anisov@innopolis.university";
+
+        const comicTitle = document.getElementById('comic-title');
+        const comicDate = document.getElementById('comic-publication-date');
+        const comicImage = document.getElementById('comic-img');
+
+        function fetchComiById(id) {
+            const comicParams = new URLSearchParams();
+            comicParams.append('id', id)
+
+            return fetch("https://fwd.innopolis.university/api/comic?" + comicParams.toString()).then(r => r.json())
+        }
+
+        function fetchIdByEmail(email) {
+            const hw2Params = new URLSearchParams();
+            hw2Params.append('email', email);
+
+            return fetch("https://fwd.innopolis.app/api/hw2?" + hw2Params.toString()).then(r => r.json())
+        }
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            let comic = await fetchComiById(await fetchIdByEmail(email));
+            comicTitle.textContent = comic['safe_title'];
+            comicDate.textContent = (new Date(Date.UTC(comic['year'], comic['month'], comic['day']))).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+            comicImage.src = comic['img']
+            comicImage.alt = comic['alt']
+        })
+    </script>
+</body>
+
+</html>
