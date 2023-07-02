@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="src/styles/style.css">
     <title>Comic</title>
 </head>
 
@@ -47,45 +47,20 @@
     <div class="tm-footer">
         <div class="tm-footer-contacts">
             <a href="https://github/com/anijackich">
-                <img src="img/social/github.svg" alt="telegram">
+                <img src="src/img/social/github.svg" alt="telegram">
             </a>
             <a href="https://t.me/anijack">
-                <img src="img/social/telegram.svg" alt="telegram">
+                <img src="src/img/social/telegram.svg" alt="telegram">
             </a>
             <a href="mailto:mr@anjk.ru">
-                <img src="img/social/mail.svg" alt="telegram">
+                <img src="src/img/social/mail.svg" alt="telegram">
             </a>
         </div>
     </div>
 
+    <script src="src/js/comic.js"></script>
+
     <script>
-        const email = "e.anisov@innopolis.university";
-
-        const comicTitle = document.getElementById('comic-title');
-        const comicDate = document.getElementById('comic-publication-date');
-        const comicImage = document.getElementById('comic-img');
-
-        function fetchComiById(id) {
-            const comicParams = new URLSearchParams();
-            comicParams.append('id', id)
-
-            return fetch("https://fwd.innopolis.university/api/comic?" + comicParams.toString()).then(r => r.json())
-        }
-
-        function fetchIdByEmail(email) {
-            const hw2Params = new URLSearchParams();
-            hw2Params.append('email', email);
-
-            return fetch("https://fwd.innopolis.app/api/hw2?" + hw2Params.toString()).then(r => r.json())
-        }
-
-        document.addEventListener("DOMContentLoaded", async function () {
-            let comic = await fetchComiById(await fetchIdByEmail(email));
-            comicTitle.textContent = comic['safe_title'];
-            comicDate.textContent = (new Date(Date.UTC(comic['year'], comic['month'], comic['day']))).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
-            comicImage.src = comic['img']
-            comicImage.alt = comic['alt']
-        })
     </script>
 </body>
 
