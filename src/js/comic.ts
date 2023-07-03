@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const email = "e.anisov@innopolis.university" as string;
 
 const comicTitle = document.getElementById('comic-title') as HTMLHeadingElement;
@@ -37,11 +39,7 @@ function fetchIdByEmail(email: string): Promise<ComicId> {
 document.addEventListener("DOMContentLoaded", async function () {
     let comic = await fetchComicById(await fetchIdByEmail(email)) as Comic;
     comicTitle.textContent = comic['safe_title'];
-    comicDate.textContent = (new Date(Date.UTC(Number(comic['year']), Number(comic['month']), Number(comic['day'])))).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
+    comicDate.textContent = moment(`${comic.year}-${comic.month}-${comic.day}`).fromNow();
     comicImage.src = comic['img'];
     comicImage.alt = comic['alt'];
 })
