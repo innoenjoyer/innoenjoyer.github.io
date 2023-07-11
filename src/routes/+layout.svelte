@@ -5,6 +5,12 @@
 <header>
     <div class="header-content">
         <h1 class="header-content-logo">Portfolio</h1>
+        <nav class="header-nav">
+            <ul>
+                <li><a href="/">My Bio</a></li>
+                <li><a href="/comic">Comic</a></li>
+            </ul>
+        </nav>
     </div>
 </header>
 
