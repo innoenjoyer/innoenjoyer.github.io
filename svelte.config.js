@@ -2,10 +2,14 @@ import adapter from '@sveltejs/adapter-node';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 
 /** @type {import('@sveltejs/kit').Config} */
+const dev = process.argv.includes('dev');
 const config = {
 	preprocess: vitePreprocess(),
-
+		
 	kit: {
+		path: {
+			base: dev ? '' : process.env.BASE_PATH, 
+		},
 		adapter: adapter()
 	}
 };
