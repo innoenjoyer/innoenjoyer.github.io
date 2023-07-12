@@ -3,10 +3,10 @@
     import { onMount } from 'svelte';
 
     const email = "e.anisov@innopolis.university" as string;
-    let comicTitle = '';
-    let comicDate = '';
-    let comicImageSrc = '';
-    let comicImageAlt = '';
+    let comicTitle = '' as string;
+    let comicDate = '' as string;
+    let comicImageSrc = '' as string;
+    let comicImageAlt = '' as string;
 
     interface Comic {
         "month": string,
